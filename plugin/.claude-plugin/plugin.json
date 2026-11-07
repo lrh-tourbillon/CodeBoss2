@@ -1,0 +1,9 @@
+{
+  "name": "codeboss",
+  "version": "2.0.0",
+  "description": "CodeBoss2: orchestrates Claude Code headless from Cowork via a supervisor pattern. Claude Code runs on the user's machine (Windows: Task Scheduler; macOS: nohup) and reports back into the supervising Cowork session with `claude -p \"[code]: ...\" --cloud <session-id>` - Anthropic's session ingress, authenticated with the machine's claude.ai login. No UI automation.",
+  "author": {
+    "name": "Lou"
+  },
+  "keywords": ["claude-code", "orchestration", "headless", "supervisor", "windows", "macos", "cloud-session", "task-scheduler"]
+}

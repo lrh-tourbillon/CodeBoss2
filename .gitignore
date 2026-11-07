@@ -1,0 +1,6 @@
+.codeboss/
+scratch/
+*.zip
+*.bak
+*.bak-*
+tests/pingpong/PONG.txt
