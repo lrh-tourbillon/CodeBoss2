@@ -1,5 +1,6 @@
 .codeboss/
 scratch/
+dist/
 *.zip
 *.bak
 *.bak-*

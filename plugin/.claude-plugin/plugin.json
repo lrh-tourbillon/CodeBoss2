@@ -5,5 +5,7 @@
   "author": {
     "name": "Lou"
   },
+  "license": "MIT",
+  "repository": "https://github.com/lrh-tourbillon/CodeBoss2",
   "keywords": ["claude-code", "orchestration", "headless", "supervisor", "windows", "macos", "cloud-session", "task-scheduler"]
 }
