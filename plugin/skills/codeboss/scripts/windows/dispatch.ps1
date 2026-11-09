@@ -161,7 +161,9 @@ if ($useScheduler) {
             ForEach-Object { Unregister-ScheduledTask -TaskName $_.TaskName -Confirm:$false -ErrorAction SilentlyContinue }
 
         $taskName  = "CodeBoss-$ProjectName-$Code"
-        $action    = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-WindowStyle Hidden $argString" -WorkingDirectory $ProjectDir
+        # conhost --headless: no console window at all. -WindowStyle Hidden is not honoured when Windows
+        # Terminal is the default terminal (a blank window titled "claude" stayed open for the whole run).
+        $action    = New-ScheduledTaskAction -Execute 'conhost.exe' -Argument "--headless powershell.exe $argString" -WorkingDirectory $ProjectDir
         $principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" -LogonType Interactive -RunLevel Limited
         $settings  = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Days 3) -MultipleInstances IgnoreNew -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
         Register-ScheduledTask -TaskName $taskName -Action $action -Principal $principal -Settings $settings -Force | Out-Null
@@ -173,7 +175,7 @@ if ($useScheduler) {
     }
 }
 if (-not $useScheduler) {
-    Start-Process powershell -WindowStyle Hidden -ArgumentList $argString
+    Start-Process conhost.exe -WindowStyle Hidden -ArgumentList "--headless powershell.exe $argString"
     $launcher = "InProcess"
 }
 else {
